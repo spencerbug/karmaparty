@@ -1,13 +1,13 @@
 {
   "name": "nshop",
   "version": "1.0.0",
-  "description": "My first-rate Nuxt.js project",
+  "description": "Nshop - A Nuxt Project",
   "author": "Spencer Neilan",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "yarn lint",
-    "dev": "nuxt",
+    "dev": "cross-env HOST=localhost PORT=3040 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
@@ -16,7 +16,7 @@
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^0.0.1",
+    "@nuxtjs/eslint-config": "^1.0.1",
     "@nuxtjs/eslint-module": "^0.0.1",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.15.1",
@@ -24,7 +24,7 @@
     "eslint-plugin-import": ">=2.16.0",
     "eslint-plugin-jest": ">=22.3.0",
     "eslint-plugin-node": ">=8.0.1",
-    "eslint-plugin-nuxt": ">=0.4.2",
+    "eslint-plugin-nuxt": "^0.4.3",
     "eslint-plugin-promise": ">=4.0.1",
     "eslint-plugin-standard": ">=4.0.0",
     "eslint-plugin-vue": "^5.2.2",
