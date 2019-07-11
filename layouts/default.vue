@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div class="responsive-background">
     <div class="container main-body">
       <nav class="navbar section">
         <div class="navbar-brand">
           <nuxt-link class="navbar-item" to="/">
-            <img src="/nshop-logo.png" width="120" height="28">
+            <!-- <img src="/nshop-logo.png" width="120" height="28"> -->
+            <img src="/kp_logo.png" width="120" height="28">
           </nuxt-link>
 
           <div class="navbar-burger burger" data-target="top-menu">
@@ -12,48 +13,30 @@
             <span></span>
             <span></span>
           </div>
-        </div>  
+        </div>
 
         <div id="top-menu" class="navbar-menu">
           <div class="navbar-start">
-            <nuxt-link class="navbar-item" to="/">
-                Home
-            </nuxt-link>        
+            <nuxt-link class="navbar-item" to="/">Home</nuxt-link>
             <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link is-active" href="#">
-                Admin
-              </a>
-              <div class="navbar-dropdown ">
-                <nuxt-link class="navbar-item" to="/admin/product-list">
-                  Products
-                </nuxt-link>
-                <nuxt-link class="navbar-item" to="/admin/product-categories">
-                  Product Categories
-                </nuxt-link>  
-                <a class="navbar-item " href="#">
-                  Orders
-                </a>
-                <a class="navbar-item " href="#">
-                  Customers
-                </a>
-                <nuxt-link class="navbar-item" to="/admin/administrators">
-                  Administrators
-                </nuxt-link>                      
-                <nuxt-link class="navbar-item" to="/admin/user-groups">
-                  User Groups
-                </nuxt-link>
+              <a class="navbar-link is-active" href="#">Admin</a>
+              <div class="navbar-dropdown">
+                <nuxt-link class="navbar-item" to="/admin/product-list">Products</nuxt-link>
+                <nuxt-link class="navbar-item" to="/admin/product-categories">Product Categories</nuxt-link>
+                <a class="navbar-item" href="#">Orders</a>
+                <a class="navbar-item" href="#">Customers</a>
+                <nuxt-link class="navbar-item" to="/admin/administrators">Administrators</nuxt-link>
+                <nuxt-link class="navbar-item" to="/admin/user-groups">User Groups</nuxt-link>
               </div>
             </div>
           </div>
 
-          <div class="navbar-end">   
-            <div class="navbar-item">
-              Hi, Guest
-            </div>       
+          <div class="navbar-end">
+            <div class="navbar-item">Hi, Guest</div>
             <div class="navbar-item">
               <div class="field is-grouped is-grouped-multiline">
                 <p class="control">
-                  <nuxt-link class="button" to="/cart">  
+                  <nuxt-link class="button" to="/cart">
                     <span class="icon is-small">
                       <i class="fa fa-shopping-cart"></i>
                     </span>
@@ -62,18 +45,16 @@
                 </p>
 
                 <p class="control">
-                  <nuxt-link class="button is-primary" to="/login">  
-                      <span class="icon is-small">
-                          <i class="fa fa-unlock-alt"></i>
-                      </span>
-                      <span>
-                        Login
-                      </span>
+                  <nuxt-link class="button is-primary" to="/login">
+                    <span class="icon is-small">
+                      <i class="fa fa-unlock-alt"></i>
+                    </span>
+                    <span>Login</span>
                   </nuxt-link>
                 </p>
 
                 <p class="control">
-                  <nuxt-link class="button is-info" to="/signup">  
+                  <nuxt-link class="button is-info" to="/signup">
                     <span class="icon is-small">
                       <i class="fa fa-user-o"></i>
                     </span>
@@ -85,21 +66,54 @@
           </div>
         </div>
       </nav>
-      <nuxt/> <!-- This is where the pages are presented -->
+      <nuxt/>
+      <!-- This is where the pages are presented -->
     </div>
 
     <footer class="footer">
       <div class="container">
         <div class="content has-text-centered">
           <p>
-            &copy; Nshop<br>
-            Nuxt & Vue Jump-start.
+            &copy; Karma Party LLC
+            <br>Nuxt & Vue Jump-start.
           </p>
           <p>
-            <img src="/nshop-icon.png">
+            <img src="/kp_icon.png" width="20">
           </p>
         </div>
       </div>
-    </footer>    
+    </footer>
   </div>
 </template>
+
+<script>
+export default {
+  data: function() {
+    return {
+      key: "value"
+    };
+  },
+  components: {},
+  mixings: [],
+  middleware: "",
+  created: function() {},
+  mounted: function() {},
+  methods: {},
+  computed: {},
+  watch: {}
+};
+</script>
+
+
+<style lang="scss">
+.responsive-background {
+  // backdrop-filter: contrast(50%) brightness(150%) blur(2px);
+  background-image: url(../static/background_lighter.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+</style>
+
+

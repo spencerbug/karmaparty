@@ -21,29 +21,39 @@ export default {
     link: [{
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/favicon.ico'
+        href: '/kp_favicon.ico'
       },
-      {
-        //css framework
-        rel: 'stylesheet',
-        href: '/bulma.css'
-      },
-      {
-        // custom styling
-        rel: 'stylesheet',
-        href: '/styles.css'
-      },
+      // {
+      //   rel: 'stylesheet',
+      //   href: '/bulma.css'
+      // },
       {
         // for icon fonts
         rel: 'stylesheet',
         href: '/font-awesome.min.css'
-      }
+      },
+      {
+        rel: 'stylesheet',
+        href: 'static/styles.css'
+      },
     ],
     script: [{
       src: '/util.js',
       type: 'text/javascript'
     }]
   },
+
+  // sass style resouces
+  styleResources: {
+    sass: [
+      // '/bulma.css',
+      'assets/bulma/bulma.sass'
+    ],
+    scss: [
+      'assets/bulmba_override.scss'
+    ]
+  },
+
   /*
    ** Customize the progress-bar color
    */
@@ -62,7 +72,8 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/style-resources'
   ],
   /*
    ** Build configuration

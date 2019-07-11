@@ -1,7 +1,7 @@
 {
-  "name": "nshop",
-  "version": "1.0.0",
-  "description": "Nshop - A Nuxt Project",
+  "name": "karmaparty",
+  "version": "1.0.1",
+  "description": "Karma Party - Socially Impactful Retail Partiest",
   "author": "Spencer Neilan",
   "private": true,
   "scripts": {
@@ -13,6 +13,8 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/style-resources": "^0.1.2",
+    "bulma": "^0.7.5",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
@@ -28,6 +30,10 @@
     "eslint-plugin-promise": ">=4.0.1",
     "eslint-plugin-standard": ">=4.0.0",
     "eslint-plugin-vue": "^5.2.2",
-    "nodemon": "^1.18.9"
+    "node-sass": "^4.12.0",
+    "nodemon": "^1.18.9",
+    "precss": "^4.0.0",
+    "sass": "^1.19.0",
+    "sass-loader": "^7.1.0"
   }
 }
