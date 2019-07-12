@@ -1,17 +1,13 @@
 <template>
   <div>
-    <section class="section left-right-pad is-fluid">
+    <!-- <section class="section left-right-pad is-fluid">
       <div class="hero is-medium is-primary is-bold has-text-centered">
         <div class="hero-body">
           <h1 class="title">Warm Welcome to Karma Party!</h1>
           <h2 class="subtitle">Your presence is a present!</h2>
-          <br>
-          <br>
-          <a class="button is-warning" @click="increment(1)">Increment +</a>
-          <a class="button is-info">{{ counter }}</a>
         </div>
       </div>
-    </section>
+    </section>-->
 
     <section class="section">
       <div class="box">
@@ -166,18 +162,7 @@
 </template>
 
 <script>
-export default {
-  methods: {
-    increment(val) {
-      this.$store.dispatch("increment", val);
-    }
-  },
-  computed: {
-    counter() {
-      return this.$store.getters.counter;
-    }
-  }
-};
+export default {};
 </script>
 
 <style lang="scss">

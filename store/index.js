@@ -6,24 +6,10 @@ export const state = () => ({
 })
 
 // set and update data
-export const mutations = {
-  setCounter(state, payload) {
-    state.counter = state.counter + payload
-  }
-}
+export const mutations = {}
 
 //where we put business logic
-export const actions = {
-  increment({
-    commit
-  }, payload) {
-    commit('setCounter', payload)
-  }
-}
+export const actions = {}
 
 //get data from firestore
-export const getters = {
-  counter(state) {
-    return state.counter
-  }
-}
+export const getters = {}

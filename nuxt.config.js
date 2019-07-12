@@ -21,7 +21,7 @@ export default {
     link: [{
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/kp_favicon.ico'
+        href: '/favicon.ico'
       },
       // {
       //   rel: 'stylesheet',

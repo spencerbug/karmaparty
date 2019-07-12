@@ -92,15 +92,7 @@ export default {
     return {
       key: "value"
     };
-  },
-  components: {},
-  mixings: [],
-  middleware: "",
-  created: function() {},
-  mounted: function() {},
-  methods: {},
-  computed: {},
-  watch: {}
+  }
 };
 </script>
 
@@ -108,7 +100,7 @@ export default {
 <style lang="scss">
 .responsive-background {
   // backdrop-filter: contrast(50%) brightness(150%) blur(2px);
-  background-image: url(../static/background_lighter.jpg);
+  background-image: url(../static/background.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
