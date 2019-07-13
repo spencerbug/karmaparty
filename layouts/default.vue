@@ -100,7 +100,7 @@ export default {
 <style lang="scss">
 .responsive-background {
   // backdrop-filter: contrast(50%) brightness(150%) blur(2px);
-  background-image: url(../static/background.jpg);
+  background-image: url(../static/background-lighter.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
