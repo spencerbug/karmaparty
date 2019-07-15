@@ -1,3 +1,5 @@
+import fireApp from "../plugins/firebase";
+
 // reference: https://vuex.vuejs.org/
 
 export const state = () => ({
@@ -9,7 +11,21 @@ export const state = () => ({
 export const mutations = {}
 
 //where we put business logic
-export const actions = {}
+export const actions = {
+  fireTest() {
+    const payload = {
+      one: 'Apple',
+      two: 'Oranges'
+    }
+    fireApp.database().ref('testdb').push(payload)
+      .then(() => {
+        console.log('SUCCESS')
+      })
+      .catch(error => {
+        console.log('ERROR', error)
+      })
+  }
+}
 
 //get data from firestore
 export const getters = {}
