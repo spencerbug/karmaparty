@@ -12,11 +12,10 @@ export const mutations = {}
 
 //where we put business logic
 export const actions = {
-
   fireTest() {
     const payload = {
       one: 'Apple',
-      two: 'Oranges',
+      two: 'Oranges'
     }
     fireApp.database().ref('testdb').push(payload)
       .then(() => {
