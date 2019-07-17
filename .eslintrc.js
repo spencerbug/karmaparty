@@ -8,6 +8,7 @@ module.exports = {
     parser: 'babel-eslint'
   },
   extends: [
+    // 'plugin:nuxt/recommended'
     'plugin:nuxt/base'
     // '@nuxtjs'
   ],
