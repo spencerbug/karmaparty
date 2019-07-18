@@ -1,4 +1,5 @@
 export default {
+  // mode: 'spa',
   mode: 'universal',
   /*
    ** Headers of the page
@@ -23,10 +24,6 @@ export default {
         type: 'image/x-icon',
         href: '/favicon.ico'
       },
-      // {
-      //   rel: 'stylesheet',
-      //   href: '/bulma.css'
-      // },
       {
         // for icon fonts
         rel: 'stylesheet',
@@ -34,7 +31,7 @@ export default {
       },
       {
         rel: 'stylesheet',
-        href: 'static/styles.css'
+        href: '/styles.css'
       },
     ],
     script: [{
@@ -49,9 +46,6 @@ export default {
       // '/bulma.css',
       'assets/bulma/bulma.sass'
     ],
-    scss: [
-      'assets/bulmba_override.scss'
-    ]
   },
 
   /*
@@ -67,7 +61,9 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    '@/plugins/vee-validate'
+  ],
   /*
    ** Nuxt.js modules
    */

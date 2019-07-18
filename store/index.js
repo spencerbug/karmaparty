@@ -27,17 +27,17 @@ export const mutations = {
 
 //where we put business logic
 export const actions = {
-  createGroup({
-    commit
-  }, payload) {
-    fireApp.database().ref('groups').push(payload)
-      .then(() => {
-        console.log('SUCCESS')
-      })
-      .catch(error => {
-        console.log('ERROR', error)
-      })
-  }
+  // createGroup({
+  //   commit
+  // }, payload) {
+  //   fireApp.database().ref('groups').push(payload)
+  //     .then(() => {
+  //       console.log('SUCCESS')
+  //     })
+  //     .catch(error => {
+  //       console.log('ERROR', error)
+  //     })
+  // }
 }
 
 //get data from firestore

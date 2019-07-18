@@ -16,7 +16,8 @@
     "@nuxtjs/style-resources": "^0.1.2",
     "bulma": "^0.7.5",
     "firebase": "^6.3.0",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vee-validate": "^2.2.13"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",

@@ -10,9 +10,20 @@
             <div class="field">
               <label class="label">New user group</label>
               <div class="control">
-                <input class="input" type="text" v-model="name">
+                <input
+                  class="input"
+                  type="text"
+                  name="name"
+                  v-model="name"
+                  v-validate="'required|min:4'"
+                  :class="{ 'is-danger' : errors.has('name') }"
+                >
+                <p v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</p>
               </div>
             </div>
+
+            <ErrorBar :error="error"/>
+
             <div class="field">
               <div class="control">
                 <button
@@ -35,23 +46,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th>1</th>
+              <tr v-for="(group, index) in groups" :key="group.key">
+                <th>{{ index + 1 }}</th>
                 <td>
-                  <a href="#">Administrator</a>
-                </td>
-                <td>
-                  <a href="#">
-                    <span class="icon has-text-danger">
-                      <i class="fa fa-lg fa-times-circle"></i>
-                    </span>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <th>2</th>
-                <td>
-                  <a href="#">Customer</a>
+                  <a href="#">{{group.name}}</a>
                 </td>
                 <td>
                   <a href="#">
@@ -70,26 +68,48 @@
 </template>
 
 <script>
+import ErrorBar from "@/components/ErrorBar";
+
 export default {
   data() {
     return {
       name: ""
     };
   },
+  components: {
+    ErrorBar
+  },
+  created() {
+    const loadedGroups = this.$store.getters["admin/groups"];
+    if (loadedGroups.length === 0) {
+      this.$store.dispatch("admin/getGroups");
+    }
+  },
   methods: {
     onSubmit() {
       // admin is a child store
-      this.$store.dispatch("admin/createGroup", { name: this.name });
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          // in store/admin.js
+          this.$store.dispatch("admin/createGroup", { name: this.name });
+        }
+      });
     },
     jobsDone() {
       this.name = "";
-      this.removeErrors();
+      this.$nextTick(() => {
+        removeErrors();
+      });
     },
     removeErrors() {
+      this.$validator.reset();
       this.$store.commit("clearErrors");
     }
   },
   computed: {
+    groups() {
+      return this.$store.getters["admin/groups"];
+    },
     error() {
       return this.$store.getters.error;
     },
