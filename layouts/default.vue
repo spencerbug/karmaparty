@@ -18,6 +18,7 @@
         <div id="top-menu" class="navbar-menu">
           <div class="navbar-start">
             <nuxt-link class="navbar-item" to="/">Home</nuxt-link>
+            <nuxt-link class="navbar-item" to="/about">About</nuxt-link>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link is-active" href="#">Admin</a>
               <div class="navbar-dropdown">
@@ -75,7 +76,7 @@
         <div class="content has-text-centered">
           <p>
             &copy; Karma Party LLC
-            <br>Nuxt & Vue Jump-start.
+            <br>Made with Nuxt and Firebase
           </p>
           <p>
             <img src="/kp_icon.png" width="20">

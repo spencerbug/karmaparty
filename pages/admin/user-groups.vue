@@ -8,7 +8,8 @@
         <div class="column is-one-third">
           <form @submit.prevent="onSubmit">
             <div class="field">
-              <label class="label">New user group</label>
+              <label class="label" v-if="!group">New user group</label>
+              <label class="label" v-else>Update user group</label>
               <div class="control">
                 <input
                   class="input"
@@ -31,7 +32,14 @@
                   class="button is-primary"
                   :class="{ 'is-loading' : busy }"
                   :disabled="busy"
-                >Create</button>
+                >{{ !group ? 'Create' : 'Update'}}</button>
+                <button
+                  style="margin-left:10px;"
+                  type="button"
+                  class="button"
+                  @click="cancelUpdate()"
+                  v-if="group"
+                >Cancel</button>
               </div>
             </div>
           </form>
@@ -41,18 +49,18 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>User group</th>
+                <th class="is-loading">User group</th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody v-if="groups.length>0">
               <tr v-for="(group, index) in groups" :key="group.key">
                 <th>{{ index + 1 }}</th>
                 <td>
-                  <a href="#">{{group.name}}</a>
+                  <a href="#" @click.prevent="selectGroup(group)">{{group.name}}</a>
                 </td>
                 <td>
-                  <a href="#">
+                  <a href="#" @click.prevent="removeGroup(group)">
                     <span class="icon has-text-danger">
                       <i class="fa fa-lg fa-times-circle"></i>
                     </span>
@@ -73,7 +81,8 @@ import ErrorBar from "@/components/ErrorBar";
 export default {
   data() {
     return {
-      name: ""
+      name: "",
+      group: null
     };
   },
   components: {
@@ -91,19 +100,46 @@ export default {
       this.$validator.validateAll().then(result => {
         if (result) {
           // in store/admin.js
-          this.$store.dispatch("admin/createGroup", { name: this.name });
+          if (!this.group) {
+            this.$store.dispatch("admin/createGroup", { name: this.name });
+          } else {
+            this.$store.dispatch("admin/updateGroup", {
+              name: this.name,
+              group: this.group
+            });
+          }
+        }
+      });
+    },
+    selectGroup(group) {
+      this.group = group;
+      this.name = group.name;
+    },
+    cancelUpdate() {
+      this.jobsDone();
+    },
+    removeGroup(group) {
+      this.$swal({
+        title: "Delete the group?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(ok => {
+        if (ok) {
+          this.$store.dispatch("admin/removeGroup", { group: group });
         }
       });
     },
     jobsDone() {
+      this.group = null;
       this.name = "";
       this.$nextTick(() => {
-        removeErrors();
+        this.removeErrors();
       });
     },
     removeErrors() {
       this.$validator.reset();
-      this.$store.commit("clearErrors");
+      this.$store.commit("clearError");
     }
   },
   computed: {
@@ -116,8 +152,8 @@ export default {
     busy() {
       return this.$store.getters.busy;
     },
-    done() {
-      return this.$store.getters.done;
+    jobDone() {
+      return this.$store.getters.jobDone;
     }
   },
   watch: {
