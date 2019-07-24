@@ -76,10 +76,20 @@
 
 <script>
 import ErrorBar from "@/components/ErrorBar";
+import apiJobMixin from "@/mixins/apiJobMixin";
 export default {
   components: {
-    ErrorBar
+    ErrorBar,
+    apiJobMixin
   },
+  data() {
+    return {
+      fullname: "",
+      email: "",
+      password: ""
+    };
+  },
+  mixins: ["apiJobMixin"],
   methods: {
     onSignUp() {
       this.$validator.validateAll().then(result => {
@@ -99,37 +109,7 @@ export default {
         this.removeErrors();
       });
       this.$router.replace("/");
-    },
-    removeErrors() {
-      this.$validator.reset();
-      this.$store.commit("clearError");
     }
-  },
-  computed: {
-    error() {
-      return this.$store.getters.error;
-    },
-    busy() {
-      return this.$store.getters.busy;
-    },
-    jobDone() {
-      return this.$store.getters.jobDone;
-    }
-  },
-  watch: {
-    jobDone(value) {
-      if (value) {
-        this.$store.commit("setJobDone", false);
-        this.jobsDone();
-      }
-    }
-  },
-  data() {
-    return {
-      fullname: "",
-      email: "",
-      password: ""
-    };
   }
 };
 </script>
