@@ -87,6 +87,52 @@ export const actions = {
         commit('setBusy', false)
         commit('setError', error)
       })
+  },
+  loginUser({
+    commit
+  }, payload) {
+    commit('setBusy', true)
+    commit('clearError')
+    // 1. Login user
+    // 2. Find the group user belongs
+    // 3. Set logged in user in local data
+    fireApp.auth().signInWithEmailAndPassword(payload.email, payload.password)
+      .then(user => {
+        const authUser = {
+          id: user.user.uid,
+          email: user.user.email,
+          name: user.user.displayName,
+        }
+
+        // select key in groups where name is Administrator
+        return fireApp.database().ref('groups').orderByChild('name').equalTo('Administrator').once('value')
+          .then(snapShot => {
+            const groupKey = Object.keys(snapShot.val())[0]
+            // select loggedInUser.id in userGroups/<key of administrators>
+            return fireApp.database().ref(`userGroups/${groupKey}`).child(`${authUser.id}`).once('value')
+              .then(ugroupSnap => {
+                // if it exists, they are in the admin group
+                if (ugroupSnap.exists()) {
+                  authUser.role = 'admin'
+                } else {
+                  authUser.role = 'customer'
+                }
+                commit('setUser', authUser)
+                commit('setBusy', false)
+                commit('setJobDone', true)
+              })
+          })
+      })
+      .catch(error => {
+        commit('setBusy', false)
+        commit('setError', error)
+      })
+  },
+  logOut({
+    commit
+  }) {
+    fireApp.auth().signOut()
+    commit('setUser', null)
   }
 }
 
@@ -94,6 +140,9 @@ export const actions = {
 export const getters = {
   user(state) {
     return state.user
+  },
+  loginStatus(state) {
+    return state.user !== null && state.user !== undefined
   },
   error(state) {
     return state.error

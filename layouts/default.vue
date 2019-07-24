@@ -33,7 +33,16 @@
           </div>
 
           <div class="navbar-end">
-            <div class="navbar-item">Hi, Guest</div>
+            <div class="navbar-item has-dropdown is-hoverable" v-if="userLoggedIn">
+              <a href="#" class="navbar-link is-active">Hi, {{username}}</a>
+              <div class="navbar-dropdown">
+                <nuxt-link class="navbar-item" to="/user-profile">Profile</nuxt-link>
+                <nuxt-link class="navbar-item" to="/usr-pwd-change">Change Password</nuxt-link>
+                <a class="navbar-item" @click="logOut">Log Out</a>
+              </div>
+            </div>
+            <div class="navbar-item" v-else>Hi, {{username}}</div>
+
             <div class="navbar-item">
               <div class="field is-grouped is-grouped-multiline">
                 <p class="control">
@@ -45,7 +54,7 @@
                   </nuxt-link>
                 </p>
 
-                <p class="control">
+                <p class="control" v-if="!userLoggedIn">
                   <nuxt-link class="button is-primary" to="/login">
                     <span class="icon is-small">
                       <i class="fa fa-unlock-alt"></i>
@@ -54,7 +63,7 @@
                   </nuxt-link>
                 </p>
 
-                <p class="control">
+                <p class="control" v-if="!userLoggedIn">
                   <nuxt-link class="button is-info" to="/signup">
                     <span class="icon is-small">
                       <i class="fa fa-user-o"></i>
@@ -89,10 +98,33 @@
 
 <script>
 export default {
-  data: function() {
+  data() {
     return {
-      key: "value"
+      username: "Guest"
     };
+  },
+  methods: {
+    logOut() {
+      this.$store.dispatch("logOut");
+      this.$router.push("/");
+    }
+  },
+  computed: {
+    userProfile() {
+      return this.$store.getters.user;
+    },
+    userLoggedIn() {
+      return this.$store.getters.loginStatus;
+    }
+  },
+  watch: {
+    userProfile(value) {
+      if (value) {
+        this.username = value.name;
+      } else {
+        this.username = "Guest";
+      }
+    }
   }
 };
 </script>

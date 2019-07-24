@@ -82,6 +82,7 @@ export default {
     ErrorBar,
     apiJobMixin
   },
+  mixins: [apiJobMixin],
   data() {
     return {
       fullname: "",
@@ -89,7 +90,6 @@ export default {
       password: ""
     };
   },
-  mixins: ["apiJobMixin"],
   methods: {
     onSignUp() {
       this.$validator.validateAll().then(result => {

@@ -49,7 +49,7 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th class="is-loading">User group</th>
+                <th>User group</th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
