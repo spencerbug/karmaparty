@@ -76,7 +76,6 @@ export const actions = {
             const groupKey = Object.keys(snapShot.val())[0]
             let groupedUser = {}
             groupedUser[newUser.uid] = payload.fullname
-            console.log(groupedUser)
             return fireApp.database().ref(`userGroups/${groupKey}`).update(groupedUser)
           })
       })

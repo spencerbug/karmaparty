@@ -95,11 +95,10 @@ export default {
       });
     },
     jobsDone() {
-      this.group = null;
-      this.name = "";
       this.$nextTick(() => {
         this.removeErrors();
       });
+      this.$router.replace("/");
     },
     removeErrors() {
       this.$validator.reset();
