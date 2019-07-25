@@ -19,7 +19,8 @@
           <div class="navbar-start">
             <nuxt-link class="navbar-item" to="/">Home</nuxt-link>
             <nuxt-link class="navbar-item" to="/about">About</nuxt-link>
-            <div class="navbar-item has-dropdown is-hoverable">
+
+            <div class="navbar-item has-dropdown is-hoverable" v-if="userIsAdmin">
               <a class="navbar-link is-active" href="#">Admin</a>
               <div class="navbar-dropdown">
                 <nuxt-link class="navbar-item" to="/admin/product-list">Products</nuxt-link>
@@ -103,6 +104,12 @@ export default {
       username: "Guest"
     };
   },
+  created() {
+    //on refresh, check if a user is logged in
+    if (!this.userLoggedIn) {
+      this.$store.dispatch("setAuthStatus");
+    }
+  },
   methods: {
     logOut() {
       this.$store.dispatch("logOut");
@@ -115,6 +122,9 @@ export default {
     },
     userLoggedIn() {
       return this.$store.getters.loginStatus;
+    },
+    userIsAdmin() {
+      return this.$store.getters.userRole === "admin";
     }
   },
   watch: {

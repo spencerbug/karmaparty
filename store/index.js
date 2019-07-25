@@ -30,6 +30,7 @@ export const mutations = {
 
 //where we put business logic
 export const actions = {
+
   signUpUser({
     commit
   }, payload) {
@@ -42,16 +43,16 @@ export const actions = {
      */
     let newUser = null
     fireApp.auth().createUserWithEmailAndPassword(payload.email, payload.password)
-      .then(user => {
-        newUser = user.user
-        // console.log(user)
+      .then(({
+        user
+      }) => {
+        newUser = user
         if (user) {
           return fireApp.auth().currentUser.updateProfile({
             displayName: payload.fullname
           }).then(() => {
             const currentUser = {
-              id: newUser.uid,
-              // id: fireApp.auth().currentUser.uid,
+              id: user.uid,
               email: payload.email,
               name: payload.fullname,
               role: 'consumer'
@@ -66,6 +67,7 @@ export const actions = {
           fullname: payload.fullname,
           createAt: new Date().toISOString()
         }
+        // fireApp.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         fireApp.database().ref(`users/${newUser.uid}`).set(userData)
       })
       .then(() => {
@@ -88,6 +90,8 @@ export const actions = {
         commit('setError', error)
       })
   },
+
+
   loginUser({
     commit
   }, payload) {
@@ -97,11 +101,13 @@ export const actions = {
     // 2. Find the group user belongs
     // 3. Set logged in user in local data
     fireApp.auth().signInWithEmailAndPassword(payload.email, payload.password)
-      .then(user => {
+      .then(({
+        user
+      }) => {
         const authUser = {
-          id: user.user.uid,
-          email: user.user.email,
-          name: user.user.displayName,
+          id: user.uid,
+          email: user.email,
+          name: user.displayName,
         }
 
         // select key in groups where name is Administrator
@@ -128,11 +134,42 @@ export const actions = {
         commit('setError', error)
       })
   },
+
+
   logOut({
     commit
   }) {
     fireApp.auth().signOut()
     commit('setUser', null)
+  },
+  setAuthStatus({
+    commit
+  }) {
+    fireApp.auth().onAuthStateChanged(user => {
+      if (user) {
+        const authUser = {
+          id: user.uid,
+          email: user.email,
+          name: user.displayName
+        }
+        // determine the role of the user
+        fireApp.database().ref('groups').orderByChild('name').equalTo('Administrator').once('value')
+          .then(snapShot => {
+            const groupKey = Object.keys(snapShot.val())[0]
+            // select loggedInUser.id in userGroups/<key of administrators>
+            fireApp.database().ref(`userGroups/${groupKey}`).child(`${authUser.id}`).once('value')
+              .then(ugroupSnap => {
+                // if it exists, they are in the admin group
+                if (ugroupSnap.exists()) {
+                  authUser.role = 'admin'
+                } else {
+                  authUser.role = 'customer'
+                }
+                commit('setUser', authUser)
+              })
+          })
+      }
+    })
   }
 }
 
@@ -143,6 +180,11 @@ export const getters = {
   },
   loginStatus(state) {
     return state.user !== null && state.user !== undefined
+  },
+  userRole(state) {
+    const isLoggedIn = state.user !== null && state.user !== undefined
+    //if you are not logged in, you are a customer. (Will change that for karma party, guests should not have customer access)
+    return (isLoggedIn) ? state.user.role : 'customer'
   },
   error(state) {
     return state.error
