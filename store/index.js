@@ -30,7 +30,6 @@ export const mutations = {
 
 //where we put business logic
 export const actions = {
-
   signUpUser({
     commit
   }, payload) {
@@ -91,7 +90,6 @@ export const actions = {
       })
   },
 
-
   loginUser({
     commit
   }, payload) {
@@ -135,13 +133,13 @@ export const actions = {
       })
   },
 
-
   logOut({
     commit
   }) {
     fireApp.auth().signOut()
     commit('setUser', null)
   },
+
   setAuthStatus({
     commit
   }) {
@@ -170,6 +168,56 @@ export const actions = {
           })
       }
     })
+  },
+
+  updateProfile({
+    commit,
+    getters
+  }, payload) {
+    // 1. Update user name with updateProfile
+    // 2. Update user email with updateEmail
+    // 3. Update the database
+    // 4. Will divide the code into chunks
+    // Administrator: -LknsI_7mjUf_QsdNYB5
+    // Customer: -LkKSodcrM9VS0LVgS_x
+    commit('setBusy', true)
+    commit('clearError')
+    const userData = getters.user
+    const user = fireApp.auth().currentUser
+    const updateEmail = () => {
+      return user.updateEmail(payload.email)
+    }
+    const updateDb = () => {
+      const updateObj = {}
+      if (userData.role == 'admin') {
+        updateObj[`userGroups/-LknsI_7mjUf_QsdNYB5/${user.uid}`] = payload.fullname
+      }
+      updateObj[`userGroups/-LknsI_7mjUf_QsdNYB5/${user.uid}`] = payload.fullname
+      updateObj[`userGroups/-LkKSodcrM9VS0LVgS_x/${user.uid}`] = payload.fullname
+      updateObj[`users/${user.uid}/email`] = payload.email
+      updateObj[`users/${user.uid}/fullname`] = payload.fullname
+      return fireApp.database().ref().update(updateObj)
+    }
+    user.updateProfile({
+        displayName: payload.fullname
+      })
+      .then(updateEmail)
+      .then(updateDb)
+      .then(() => {
+        const userObj = {
+          id: userData.id,
+          email: payload.email,
+          name: payload.fullname,
+          role: userData.role
+        }
+        commit('setUser', userObj)
+        commit('setBusy', false)
+        commit('setJobDone', true)
+      })
+      .catch(error => {
+        commit('setBusy', false)
+        commit('setError', error)
+      })
   }
 }
 
