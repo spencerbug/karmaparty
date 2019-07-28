@@ -8,14 +8,18 @@
             <img src="/kp_logo.png" width="120" height="28">
           </nuxt-link>
 
-          <div class="navbar-burger burger" data-target="top-menu">
+          <div
+            class="navbar-burger burger"
+            @click="toggleActive('burger')"
+            :class="{ 'is-active' : isActive.burger }"
+          >
             <span></span>
             <span></span>
             <span></span>
           </div>
         </div>
 
-        <div id="top-menu" class="navbar-menu">
+        <div id="top-menu" class="navbar-menu" :class="{ 'is-active' : isActive.burger }">
           <div class="navbar-start">
             <nuxt-link class="navbar-item" to="/">Home</nuxt-link>
             <nuxt-link class="navbar-item" to="/about">About</nuxt-link>
@@ -48,7 +52,7 @@
               >Hi, {{username}}</a>
               <div class="navbar-dropdown" :class="{ 'is-hidden' : !isActive.profile }">
                 <nuxt-link class="navbar-item" to="/user-profile">Profile</nuxt-link>
-                <nuxt-link class="navbar-item" to="/usr-pwd-change">Change Password</nuxt-link>
+                <nuxt-link class="navbar-item" to="/user-pwd-change">Change Password</nuxt-link>
                 <a class="navbar-item" @click="logOut">Log Out</a>
               </div>
             </div>
@@ -114,7 +118,8 @@ export default {
       username: "Guest",
       isActive: {
         admin: true,
-        profile: true
+        profile: true,
+        burger: false
       }
     };
   },
