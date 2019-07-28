@@ -15,7 +15,7 @@
                   type="text"
                   name="fullname"
                   v-model="fullname"
-                  v-validate="'required|min:1|alpha_spaces'"
+                  v-validate="'required|min:4'"
                   :class="{ 'is-danger' : errors.has('fullname') }"
                 >
                 <p

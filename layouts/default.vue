@@ -21,8 +21,13 @@
             <nuxt-link class="navbar-item" to="/about">About</nuxt-link>
 
             <div class="navbar-item has-dropdown is-hoverable" v-if="userIsAdmin">
-              <a class="navbar-link is-active" href="#">Admin</a>
-              <div class="navbar-dropdown">
+              <a
+                class="navbar-link"
+                :class="{ 'is-active' : isActive.admin }"
+                @click="toggleActive('admin')"
+                href="#"
+              >Admin</a>
+              <div class="navbar-dropdown" :class="{ 'is-hidden' : !isActive.admin }">
                 <nuxt-link class="navbar-item" to="/admin/product-list">Products</nuxt-link>
                 <nuxt-link class="navbar-item" to="/admin/product-categories">Product Categories</nuxt-link>
                 <a class="navbar-item" href="#">Orders</a>
@@ -35,8 +40,13 @@
 
           <div class="navbar-end">
             <div class="navbar-item has-dropdown is-hoverable" v-if="userLoggedIn">
-              <a href="#" class="navbar-link is-active">Hi, {{username}}</a>
-              <div class="navbar-dropdown">
+              <a
+                href="#"
+                class="navbar-link"
+                :class="{ 'is-active' : isActive.profile }"
+                @click="toggleActive('profile')"
+              >Hi, {{username}}</a>
+              <div class="navbar-dropdown" :class="{ 'is-hidden' : !isActive.profile }">
                 <nuxt-link class="navbar-item" to="/user-profile">Profile</nuxt-link>
                 <nuxt-link class="navbar-item" to="/usr-pwd-change">Change Password</nuxt-link>
                 <a class="navbar-item" @click="logOut">Log Out</a>
@@ -101,7 +111,11 @@
 export default {
   data() {
     return {
-      username: "Guest"
+      username: "Guest",
+      isActive: {
+        admin: true,
+        profile: true
+      }
     };
   },
   created() {
@@ -114,6 +128,9 @@ export default {
     logOut() {
       this.$store.dispatch("logOut");
       this.$router.push("/");
+    },
+    toggleActive(menu) {
+      this.isActive[menu] = !this.isActive[menu];
     }
   },
   computed: {
