@@ -12,6 +12,7 @@
             class="navbar-burger burger"
             @click="toggleActive('burger')"
             :class="{ 'is-active' : isActive.burger }"
+            data-target="top-menu"
           >
             <span></span>
             <span></span>
@@ -128,7 +129,12 @@ export default {
     if (!this.userLoggedIn) {
       this.$store.dispatch("setAuthStatus");
     }
+    this.$router.beforeResolve((to, from, next) => {
+      this.isActive.burger = false;
+      next();
+    });
   },
+
   methods: {
     logOut() {
       this.$store.dispatch("logOut");

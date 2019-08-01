@@ -31,7 +31,7 @@ export const mutations = {
   }
 }
 
-//where we put business logic
+//where we put business logic. Call with dispatch
 export const actions = {
   signUpUser({
     commit
@@ -214,6 +214,23 @@ export const actions = {
           role: userData.role
         }
         commit('setUser', userObj)
+        commit('setBusy', false)
+        commit('setJobDone', true)
+      })
+      .catch(error => {
+        commit('setBusy', false)
+        commit('setError', error)
+      })
+  },
+  changePwd({
+    commit
+  }, payload) {
+    commit('setBusy', true)
+    commit('clearError')
+    const user = fireApp.auth().currentUser
+    console.log('setting password to ' + payload.password)
+    user.updatePassword(payload.password)
+      .then(() => {
         commit('setBusy', false)
         commit('setJobDone', true)
       })

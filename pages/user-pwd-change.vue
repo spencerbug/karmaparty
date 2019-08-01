@@ -6,7 +6,7 @@
 
       <div class="columns is-centered is-mobile">
         <div class="column is-half-desktop is-full-mobile is-full-tablet">
-          <form>
+          <form @submit.prevent="changePwd">
             <div class="field">
               <label class="label">New password</label>
               <div class="control">
@@ -89,6 +89,8 @@ export default {
       this.$swal({
         title: "Password changed successfuly",
         icon: "success"
+      }).then(() => {
+        this.$router.replace("/");
       });
     }
   }

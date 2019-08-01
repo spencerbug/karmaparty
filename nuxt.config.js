@@ -44,7 +44,8 @@ export default {
   styleResources: {
     sass: [
       // '/bulma.css',
-      'assets/bulma/bulma.sass'
+      // 'assets/bulma/bulma.sass',
+      'assets/bulma.sass',
     ],
   },
 
@@ -57,13 +58,16 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    'vue-croppa/dist/vue-croppa.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
     '@/plugins/vee-validate',
-    '@/plugins/vue-swal'
+    '@/plugins/vue-swal',
+    '@/plugins/vue-croppa',
   ],
   /*
    ** Nuxt.js modules
