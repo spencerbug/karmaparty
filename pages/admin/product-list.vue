@@ -38,10 +38,10 @@
             </td>
             <td>{{ product.code }}</td>
             <td>{{ product.brand }}</td>
-            <td>{{ product.stock }}</td>
-            <td>{{ product.status == 1 ? 'Available' : 'Not Available' }}</td>
+            <td class="has-text-centered">{{ product.stock }}</td>
+            <td class="has-text-centered">{{ product.status == 1 ? 'Available' : 'Not Available' }}</td>
             <td>
-              <a href="#">
+              <a href="#" @click.prevent="removeProduct(product)">
                 <span class="icon has-text-danger">
                   <i class="fa fa-lg fa-times-circle"></i>
                 </span>
@@ -62,11 +62,23 @@ export default {
       this.$store.dispatch("product/getProducts");
     }
   },
+  methods: {
+    removeProduct(product) {
+      this.$swal({
+        title: "Delete the product?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(ok => {
+        if (ok) {
+          this.$store.dispatch("product/removeProduct", product);
+        }
+      });
+    }
+  },
   computed: {
     products() {
-      let products = this.$store.getters["product/products"];
-
-      return products;
+      return this.$store.getters["product/products"];
     }
   }
 };

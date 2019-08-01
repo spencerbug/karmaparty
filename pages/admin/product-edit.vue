@@ -229,7 +229,7 @@ export default {
       reader.readAsDataURL(files[0]);
     },
     jobsDone() {
-      console.log("DONE");
+      this.$router.push("product-list");
     },
     goBack() {
       window.history.go(-1);
@@ -243,9 +243,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.croppa-container.c1 {
-  display: block;
-}
-</style>
 
