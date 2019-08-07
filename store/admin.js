@@ -39,6 +39,18 @@ export const actions = {
     commit('clearError', null, {
       root: true
     })
+    // let groupObject = {
+    //   name: payload.name,
+    //   admin: false
+    // }
+    // if (payload.name.toLowerCase().includes('admin')) {
+    //   groupObject.admin = true
+    // }
+    // fireApp.firestore().collection('groups').doc(`${payload.name}`).set(groupObject)
+    //   .then(() => {
+    //     console.log('pushed to firestore!!')
+    //   })
+
     fireApp.database().ref('groups').push(payload)
       .then(() => {
         commit('setBusy', false, {
