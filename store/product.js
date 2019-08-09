@@ -285,7 +285,7 @@ export const actions = {
       })
       .then(() => {
         //if oldImageUrl, delete the old one
-        if (oldImageUrl) {
+        if (oldImageUrl && oldImageUrl != productData.imageUrl) {
           const refUrl = oldImageUrl.split('?')[0]
           const httpsRef = fireApp.storage().refFromURL(refUrl)
           return httpsRef.delete()

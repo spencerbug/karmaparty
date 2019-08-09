@@ -9,3 +9,10 @@ Vue.filter('currency', (value) => {
   });
   return formatter.format(value);
 })
+
+
+//newline to linebreak
+Vue.filter('nl2br', (value) => {
+  if (!value) return ''
+  return value.replace(/\n/g, '<br>')
+})

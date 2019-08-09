@@ -1,0 +1,2 @@
+development.js filter=git-crypt diff=git-crypt
+production.js filter=git-crypt diff=git-crypt

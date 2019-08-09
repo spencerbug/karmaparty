@@ -1,14 +1,14 @@
 <template>
   <div>
     <section class="section no-top-pad">
-      <h5 class="title is-5 has-text-white">Login</h5>
+      <h5 class="title is-5">Login</h5>
       <hr>
 
       <div class="columns is-centered is-mobile">
         <div class="column is-half-desktop is-full-mobile is-full-tablet">
           <form @submit.prevent="onLogin">
             <div class="field">
-              <label class="label has-text-white">Email</label>
+              <label class="label">Email</label>
               <div class="control">
                 <input
                   class="input"
@@ -22,7 +22,7 @@
               </div>
             </div>
             <div class="field">
-              <label class="label has-text-white">Password</label>
+              <label class="label">Password</label>
               <div class="control">
                 <input
                   class="input"
