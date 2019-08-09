@@ -42,8 +42,8 @@ export default {
 
   // sass style resouces
   styleResources: {
-    sass: [
-      'assets/bulma.sass',
+    scss: [
+      'assets/bulma.scss',
     ],
   },
 
@@ -73,7 +73,8 @@ export default {
    */
   modules: [
     '@nuxtjs/eslint-module',
-    '@nuxtjs/style-resources'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/toast'
   ],
   /*
    ** Build configuration

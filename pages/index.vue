@@ -13,28 +13,36 @@
       <div class="box">
         <nav class="level">
           <div class="level-left">
-            <form @submit.prevent="search">
-              <div class="field is-grouped is-grouped-multiline">
-                <p class="control">
-                  <input class="input" type="text" v-model="keyword" placeholder="Keyword">
-                </p>
-                <p class="control">
-                  <span @keydown.enter="search" class="select">
-                    <select v-model="category">
-                      <option value>All</option>
-                      <option
-                        v-for="category in categories"
-                        :key="category.key"
-                        :value="category.key"
-                      >{{category.name}}</option>
-                    </select>
-                  </span>
-                </p>
-                <p class="control">
-                  <a class="button is-primary" @click.prevent="search">Search</a>
-                </p>
-              </div>
-            </form>
+            <div class="field is-grouped is-grouped-multiline">
+              <p class="control">
+                <input
+                  @keydown.enter="search"
+                  class="input"
+                  type="text"
+                  v-model="keyword"
+                  placeholder="Keyword"
+                >
+              </p>
+              <p class="control">
+                <span @keydown.enter="search" class="select">
+                  <select v-model="category">
+                    <option value>All</option>
+                    <option
+                      v-for="category in categories"
+                      :key="category.key"
+                      :value="category.key"
+                    >{{category.name}}</option>
+                  </select>
+                </span>
+              </p>
+              <p class="control">
+                <a class="button is-primary" @click.prevent="search">Search</a>
+                <a
+                  class="button is-warning"
+                  @click.prevent="$store.commit('catalog/emptyCart')"
+                >Empty Cart</a>
+              </p>
+            </div>
           </div>
 
           <div class="level-right">

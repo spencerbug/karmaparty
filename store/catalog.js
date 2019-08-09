@@ -5,6 +5,9 @@ import {
 export const state = () => ({
   products: [],
   categories: [],
+  cart: {
+    items: []
+  }
 })
 
 //commit
@@ -14,6 +17,12 @@ export const mutations = {
   },
   loadCategories(state, payload) {
     state.categories = payload
+  },
+  updateCart(state, payload) {
+    state.cart.items.push(payload)
+  },
+  emptyCart(state) {
+    state.cart.items = []
   }
 }
 
@@ -109,5 +118,8 @@ export const getters = {
   },
   categories(state) {
     return state.categories
+  },
+  cart(state) {
+    return state.cart
   }
 }
