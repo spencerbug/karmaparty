@@ -43,8 +43,6 @@ export default {
   // sass style resouces
   styleResources: {
     sass: [
-      // '/bulma.css',
-      // 'assets/bulma/bulma.sass',
       'assets/bulma.sass',
     ],
   },
@@ -68,6 +66,7 @@ export default {
     '@/plugins/vee-validate',
     '@/plugins/vue-swal',
     '@/plugins/vue-croppa',
+    '@/plugins/filters',
   ],
   /*
    ** Nuxt.js modules

@@ -88,6 +88,7 @@ export default {
   components: {
     ErrorBar
   },
+  middleware: "verify-admin",
   created() {
     const loadedGroups = this.$store.getters["admin/groups"];
     if (loadedGroups.length === 0) {
