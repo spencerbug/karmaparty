@@ -32,7 +32,7 @@ export const mutations = {
   },
   setForwardRoute(state, payload) {
     state.forwardRoute = payload
-  }
+  },
 }
 
 //where we put business logic. Call with dispatch

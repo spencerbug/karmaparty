@@ -40,6 +40,7 @@ export default {
   methods: {
     jobsDone() {
       this.orderSuccess = true;
+      this.$warehouse.remove("cart");
     }
   }
 };

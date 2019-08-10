@@ -37,6 +37,10 @@ export const mutations = {
     if (state.cart.items[payload].quantity === 0) {
       state.cart.items.splice(payload, 1)
     }
+  },
+  reloadCart(state, payload) {
+    state.cart.items = payload.items
+    // this.$store.commit("reloadCart", cartInMemory);
   }
 }
 

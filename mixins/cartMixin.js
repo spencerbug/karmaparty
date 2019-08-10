@@ -25,13 +25,13 @@ export default {
     addToCart(product, quantity) {
       const index = this.productInCart(product)
       const productQuantity = (!quantity || quantity < 1) ? 1 : parseInt(quantity);
-      console.log('got here', product, productQuantity, index, )
       if (index === null) {
         const item = {
           product: product,
           quantity: productQuantity
         };
         this.$store.commit("catalog/updateCart", item);
+
       } else {
         if (!quantity) {
           this.$store.commit("catalog/incrementQuantity", index)
@@ -42,17 +42,23 @@ export default {
           })
         }
       }
+      this.updateLocalStorage()
       this.$toast.show('Shopping cart updated', {
         theme: 'bubble',
         position: 'top-center',
         duration: 1500
       })
     },
-    incrementQuantity(i) {
-      this.$store.commit('catalog/incrementQuantity', i)
+    incrementQuantity(index) {
+      this.$store.commit('catalog/incrementQuantity', index)
+      this.updateLocalStorage()
     },
-    decrementQuantity(i) {
-      this.$store.commit('catalog/decrementQuantity', i)
+    decrementQuantity(index) {
+      this.$store.commit('catalog/decrementQuantity', index)
+      this.updateLocalStorage()
+    },
+    updateLocalStorage() {
+      this.$warehouse.set('cart', this.cart)
     }
   },
   computed: {

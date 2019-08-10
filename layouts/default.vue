@@ -136,7 +136,12 @@ export default {
       next();
     });
   },
-
+  mounted() {
+    const cartInMemory = this.$warehouse.get("cart");
+    if (this.cart.items.length === 0 && cartInMemory !== undefined) {
+      this.$store.commit("catalog/reloadCart", cartInMemory);
+    }
+  },
   methods: {
     logOut() {
       this.$store.dispatch("logOut");

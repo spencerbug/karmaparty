@@ -1,4 +1,4 @@
-# Karma Party E
+# Karma Party Ecommerce
 
 > My first-rate Nuxt.js project
 
