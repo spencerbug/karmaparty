@@ -1,6 +1,12 @@
-export default {
+const pkg = require("./package");
+const env = require("dotenv").config();
+console.log('TEST', process.env.FIREBASE_MESSAGING_SENDER_ID);
+module.exports = {
   // mode: 'spa',
   mode: 'universal',
+  env: env.parsed,
+
+  srcDir: "src",
   /*
    ** Headers of the page
    */
