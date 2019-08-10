@@ -21,7 +21,7 @@
                   type="text"
                   v-model="keyword"
                   placeholder="Keyword"
-                >
+                />
               </p>
               <p class="control">
                 <span @keydown.enter="search" class="select">
@@ -37,10 +37,6 @@
               </p>
               <p class="control">
                 <a class="button is-primary" @click.prevent="search">Search</a>
-                <a
-                  class="button is-warning"
-                  @click.prevent="$store.commit('catalog/emptyCart')"
-                >Empty Cart</a>
               </p>
             </div>
           </div>

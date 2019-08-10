@@ -3,7 +3,7 @@
     <div class="card-image">
       <figure class="image is-4by3">
         <nuxt-link :to="{ path: productPath(product.name, product.key) }">
-          <img :src="product.imageUrl" alt="Image">
+          <img :src="product.imageUrl" alt="Image" />
         </nuxt-link>
       </figure>
     </div>
@@ -16,7 +16,7 @@
     <footer class="card-footer">
       <p class="card-footer-item">
         <span>
-          <a href="#" class="button is-primary" @click.prevent="addToCart(product, 1)">Add to Cart</a>
+          <a href="#" class="button is-primary" @click.prevent="addToCart(product)">Add to Cart</a>
         </span>
       </p>
     </footer>

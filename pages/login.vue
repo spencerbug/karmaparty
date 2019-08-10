@@ -2,7 +2,7 @@
   <div>
     <section class="section no-top-pad">
       <h5 class="title is-5">Login</h5>
-      <hr>
+      <hr />
 
       <div class="columns is-centered is-mobile">
         <div class="column is-half-desktop is-full-mobile is-full-tablet">
@@ -17,7 +17,7 @@
                   v-model="email"
                   v-validate="'required|email'"
                   :class="{ 'is-danger' : errors.has('email') }"
-                >
+                />
                 <p v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</p>
               </div>
             </div>
@@ -30,7 +30,7 @@
                   name="password"
                   v-model="password"
                   :class="{ 'is-danger' : errors.has('password') }"
-                >
+                />
                 <p
                   v-show="errors.has('password')"
                   class="help is-danger"
@@ -38,7 +38,7 @@
               </div>
             </div>
 
-            <ErrorBar :error="error"/>
+            <ErrorBar :error="error" />
             <div class="field">
               <div class="control">
                 <button
@@ -92,7 +92,15 @@ export default {
       this.$nextTick(() => {
         this.removeErrors();
       });
-      this.$router.replace("/");
+      let nextRoute = "/";
+      //if you added items to the cart before you logged in,
+      //logging in will route you the where you left off
+      const forwardRoute = this.$store.getters.forwardRoute;
+      if (forwardRoute !== null) {
+        nextRoute = forwardRoute;
+        this.$store.commit("setForwardRoute", null);
+      }
+      this.$router.replace(nextRoute);
     }
   }
 };

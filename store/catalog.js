@@ -23,6 +23,20 @@ export const mutations = {
   },
   emptyCart(state) {
     state.cart.items = []
+  },
+  updateQuantity(state, payload) {
+    state.cart.items[payload.index].quantity = payload.productQuantity
+  },
+  incrementQuantity(state, payload) {
+    state.cart.items[payload].quantity++
+  },
+  decrementQuantity(state, payload) {
+    if (state.cart.items[payload].quantity > 0) {
+      state.cart.items[payload].quantity--
+    }
+    if (state.cart.items[payload].quantity === 0) {
+      state.cart.items.splice(payload, 1)
+    }
   }
 }
 

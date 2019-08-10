@@ -5,7 +5,7 @@
         <div class="navbar-brand">
           <nuxt-link class="navbar-item" to="/">
             <!-- <img src="/nshop-logo.png" width="120" height="28"> -->
-            <img src="/kp_logo.png" width="120" height="28">
+            <img src="/kp_logo.png" width="120" height="28" />
           </nuxt-link>
 
           <div
@@ -66,7 +66,7 @@
                     <span class="icon is-small">
                       <i class="fa fa-shopping-cart"></i>
                     </span>
-                    <span>&bullet; {{ cart.items.length }} {{cart.items.length == 1 ? 'item' : 'items'}} ({{cartTotal | currency}})</span>
+                    <span>&bullet; {{ quantityTotal }} {{quantityTotal == 1 ? 'item' : 'items'}} ({{cartTotal | currency}})</span>
                   </nuxt-link>
                 </p>
 
@@ -92,7 +92,7 @@
           </div>
         </div>
       </nav>
-      <nuxt/>
+      <nuxt />
       <!-- This is where the pages are presented -->
     </div>
 
@@ -101,10 +101,10 @@
         <div class="content has-text-centered">
           <p>
             &copy; Karma Party LLC
-            <br>Made with Nuxt and Firebase
+            <br />Made with Nuxt and Firebase
           </p>
           <p>
-            <img src="/kp_icon.png" width="20">
+            <img src="/kp_icon.png" width="20" />
           </p>
         </div>
       </div>

@@ -4,13 +4,13 @@
       <div class="columns">
         <div class="column is-6">
           <div class="image is-4by3">
-            <img :src="product.imageUrl">
+            <img :src="product.imageUrl" />
           </div>
         </div>
         <div class="column is-5 is-offset-1">
           <div class="title is-2">{{product.name}}</div>
           <p class="title is-3 has-text-muted">{{product.price | currency}}</p>
-          <hr>
+          <hr />
           <table class="table">
             <tbody>
               <tr>
@@ -38,10 +38,19 @@
 
           <div class="field is-grouped is-grouped-multiline">
             <p class="control">
-              <input class="input has-text-centered" style="width:50px;" type="text" name value="1">
+              <input
+                class="input has-text-centered"
+                style="width:50px;"
+                type="number"
+                ref="quantity"
+                value="1"
+              />
             </p>
             <p class="control">
-              <a class="button is-primary">Add to cart</a>
+              <a
+                class="button is-primary"
+                @click.prevent="addToCart(product, $refs.quantity.value)"
+              >Add to cart</a>
             </p>
           </div>
         </div>
@@ -50,7 +59,7 @@
 
     <section v-if="product.description" class="section">
       <h6 class="title is-6">Details</h6>
-      <hr size="1">
+      <hr size="1" />
       <div class="content">
         <!-- inner-html prop allos us to insert filters -->
         <p :inner-html.prop="product.description | nl2br"></p>
@@ -61,7 +70,9 @@
 
 <script>
 import { fireApp } from "@/plugins/firebase";
+import cartMixin from "@/mixins/cartMixin";
 export default {
+  mixins: [cartMixin],
   asyncData({ params }) {
     // search engine friendly features
     return fireApp
