@@ -25,7 +25,7 @@ export const mutations = {
     state.cart.items = []
   },
   updateQuantity(state, payload) {
-    state.cart.items[payload.index].quantity = payload.productQuantity
+    state.cart.items[payload.index].quantity += payload.productQuantity
   },
   incrementQuantity(state, payload) {
     state.cart.items[payload].quantity++
@@ -122,6 +122,39 @@ export const actions = {
       })
       .catch(error => {
         console.log(error)
+      })
+  },
+  postOrder({
+    commit
+  }, payload) {
+    // orders/orderKey/userKey/productKey/productDetail
+    const orderKey = fireApp.database().ref('orders').push().key
+    const items = payload.items
+    const user = fireApp.auth().currentUser
+    let orderItems = {}
+
+    items.forEach(item => {
+      orderItems[`orders/${orderKey}/${user.uid}/${item.product.key}`] = {
+        code: item.product.code,
+        product: item.product.name,
+        price: item.product.price,
+        quantity: item.quantity,
+        imageUrl: item.product.imageUrl,
+        createdAt: new Date().toISOString()
+      }
+    })
+
+    fireApp.database().ref().update(orderItems)
+      .then(() => {
+        commit('emptyCart')
+        commit('setJobDone', true, {
+          root: true
+        })
+      })
+      .catch(error => {
+        commit('setError', error, {
+          root: true
+        })
       })
   }
 }

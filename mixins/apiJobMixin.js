@@ -1,3 +1,5 @@
+//this mixin requires you to import your own jobsDone method,
+//which updates the display after the processing has finished
 export default {
   methods: {
     removeErrors() {

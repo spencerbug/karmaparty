@@ -24,17 +24,11 @@
 </template>
 
 <script>
-import { slugString } from "@/plugins/helpers";
 import cartMixin from "@/mixins/cartMixin";
 export default {
   props: ["product"],
   mixins: [cartMixin], //cart, addToCart, cartTotal
-  methods: {
-    productPath(name, key) {
-      const slug = slugString(name);
-      return `/product/${slug}/${key}`;
-    }
-  }
+  methods: {}
 };
 </script>
 

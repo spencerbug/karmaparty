@@ -1,4 +1,8 @@
+import {
+  slugString
+} from "@/plugins/helpers"
 export default {
+
   data() {
     return {
       cart: this.$store.getters['catalog/cart']
@@ -14,9 +18,14 @@ export default {
       }
       return null
     },
+    productPath(name, key) {
+      const slug = slugString(name);
+      return `/product/${slug}/${key}`;
+    },
     addToCart(product, quantity) {
       const index = this.productInCart(product)
       const productQuantity = (!quantity || quantity < 1) ? 1 : parseInt(quantity);
+      console.log('got here', product, productQuantity, index, )
       if (index === null) {
         const item = {
           product: product,

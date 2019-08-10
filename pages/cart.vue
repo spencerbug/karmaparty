@@ -20,7 +20,11 @@
               <td>
                 <img :src="item.product.imageUrl" alt="Image" class="image is-48x48" />
               </td>
-              <td>{{item.product.name}}</td>
+              <td>
+                <nuxt-link
+                  :to="{ path: productPath(item.product.name, item.product.key) }"
+                >{{item.product.name}}</nuxt-link>
+              </td>
               <td class="has-text-centered">
                 {{item.quantity}}
                 <a
@@ -77,7 +81,7 @@ export default {
   mixins: [cartMixin],
   methods: {
     checkout() {
-      const isLoggedIn = this.$store.getters.loginSatus;
+      const isLoggedIn = this.$store.getters.loginStatus;
       if (!isLoggedIn) {
         this.$store.commit("setForwardRoute", "/checkout");
         this.$router.push("/login");
