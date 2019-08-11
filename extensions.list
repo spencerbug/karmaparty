@@ -1,0 +1,12 @@
+#run:
+#cat extensions.list | grep -v '^#' | xargs -L1 code --install-extension
+dbaeumer.vscode-eslint
+dcasella.monokai-plusplus
+esbenp.prettier-vscode
+gencer.html-slim-scss-css-class-completion
+HookyQR.beautify
+lukapetrovic.image-resizer
+octref.vetur
+PeterJausovec.vscode-docker
+pranaygp.vscode-css-peek
+ritwickdey.LiveServer

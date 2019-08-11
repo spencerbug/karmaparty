@@ -9,7 +9,7 @@
     "precommit": "yarn lint",
     "dev": "cross-env HOST=localhost PORT=3040 nuxt",
     "build": "nuxt build",
-    "start": "cross-env HOST=localhost PORT=3040 NODE_ENV=production node server/server.js",
+    "start": "cross-env HOST=localhost PORT=3040 NODE_ENV=develoment node server/server.js",
     "generate": "nuxt generate"
   },
   "dependencies": {
