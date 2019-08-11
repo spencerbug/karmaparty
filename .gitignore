@@ -7,6 +7,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#bfg report
+..bfg-report
+
 # Runtime data
 pids
 *.pid
