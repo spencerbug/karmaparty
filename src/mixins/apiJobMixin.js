@@ -22,7 +22,9 @@ export default {
     jobDone(value) {
       if (value) {
         this.$store.commit("setJobDone", false);
-        this.jobsDone();
+        if (typeof (this.jobsDone == 'functions')) {
+          this.jobsDone();
+        }
       }
     }
   },

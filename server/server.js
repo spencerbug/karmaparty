@@ -1,57 +1,40 @@
-const {
-  Nuxt
-} = require('nuxt')
 const express = require('express')
-const port = process.env.PORT || 8080
-
+const consola = require('consola')
+const {
+  Nuxt,
+  Builder
+} = require('nuxt')
 const app = express()
-console.log('TEST')
-const nuxtConfig = require('../nuxt.config.js')
 
+// Import and Set Nuxt.js options
+const config = require('../nuxt.config.js')
+config.dev = !(process.env.NODE_ENV === 'production')
 
+async function start() {
+  // Init Nuxt.js
+  const nuxt = new Nuxt(config)
 
-// Instantiate Nuxt
-const nuxt = new Nuxt(nuxtConfig)
+  const {
+    host,
+    port
+  } = nuxt.options.server
 
-app.use(nuxt.render)
+  // Build only in dev mode
+  if (config.dev) {
+    const builder = new Builder(nuxt)
+    await builder.build()
+  } else {
+    await nuxt.ready()
+  }
 
-app.listen(port, '127.0.0.1', () => {
-  console.log(`Server listening  on http://127.0.0.1:${port}`)
-})
+  // Give nuxt middleware to express
+  app.use(nuxt.render)
 
-
-
-// const express = require('express')
-// const consola = require('consola')
-// const { Nuxt, Builder } = require('nuxt')
-// const app = express()
-
-// // Import and Set Nuxt.js options
-// const config = require('../nuxt.config.js')
-// config.dev = !(process.env.NODE_ENV === 'production')
-
-// async function start() {
-//   // Init Nuxt.js
-//   const nuxt = new Nuxt(config)
-
-//   const { host, port } = nuxt.options.server
-
-//   // Build only in dev mode
-//   if (config.dev) {
-//     const builder = new Builder(nuxt)
-//     await builder.build()
-//   } else {
-//     await nuxt.ready()
-//   }
-
-//   // Give nuxt middleware to express
-//   app.use(nuxt.render)
-
-//   // Listen the server
-//   app.listen(port, host)
-//   consola.ready({
-//     message: `Server listening on http://${host}:${port}`,
-//     badge: true
-//   })
-// }
-// start()
+  // Listen the server
+  app.listen(port, host)
+  consola.ready({
+    message: `Server listening on http://${host}:${port}`,
+    badge: true
+  })
+}
+start()

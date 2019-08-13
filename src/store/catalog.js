@@ -7,7 +7,8 @@ export const state = () => ({
   categories: [],
   cart: {
     items: []
-  }
+  },
+  product: null
 })
 
 //commit
@@ -160,7 +161,56 @@ export const actions = {
           root: true
         })
       })
-  }
+  },
+  getProductByKey({
+    commit,
+    getters
+  }, payload) {
+    commit('setBusy', true, {
+      root: true
+    })
+    commit('clearError', null, {
+      root: true
+    })
+    let foundProduct = getters['products'].find(product => {
+      return (product.key == payload)
+    })
+
+    if (!foundProduct) {
+      fireApp.database().ref(`products/${payload}`).once('value')
+        .then(snapShot => {
+          foundProduct = snapShot.val()
+          commit('product/loadProduct', foundProduct, {
+            root: true
+          })
+          commit('setBusy', false, {
+            root: true
+          })
+          commit('setJobDone', true, {
+            root: true
+          })
+        })
+        .catch(error => {
+          commit('setBusy', false, {
+            root: true
+          })
+          commit('setError', error, {
+            root: true
+          })
+        })
+    } else {
+      commit('setBusy', false, {
+        root: true
+      })
+      commit('setJobDone', true, {
+        root: true
+      })
+      commit('product/loadProduct', foundProduct, {
+        root: true
+      })
+    }
+
+  },
 }
 //getters.*
 export const getters = {
