@@ -1,8 +1,8 @@
 const env = require("dotenv").config();
 
 module.exports = {
-  mode: 'spa',
-  // mode: 'universal',
+  // mode: 'spa',
+  mode: 'universal',
   env: env.parsed,
 
   srcDir: "src",
@@ -97,7 +97,14 @@ module.exports = {
   /*
    ** Build configuration
    */
+  buildDir: 'functions/.nuxt',
   build: {
+    publicPath: '/public/',
+    babel: {
+      babelrc: false,
+      cacheDirectory: undefined,
+      presets: ["@babel/preset-env"]
+    },
     /*
      ** You can extend webpack config here
      */

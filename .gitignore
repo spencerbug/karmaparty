@@ -89,3 +89,9 @@ sw.*
 
 # Mac OSX
 .DS_Store
+
+#firebase
+.firebaserc
+*.cache
+public/
+package-lock.json

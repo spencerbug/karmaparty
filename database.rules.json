@@ -1,0 +1,45 @@
+//admin user groupd id: -LknsI_7mjUf_QsdNYB5
+{
+  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+  "rules": {
+    "groups": {
+      ".read": "auth != null",
+      ".write": "root.child('userGroups').child('-LknsI_7mjUf_QsdNYB5').child(auth.uid).exists()",
+      ".indexOn": ["name"]
+    },
+    "userGroups": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "users": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "categories": {
+      ".read": "true",
+      ".write": "root.child('userGroups').child('-LknsI_7mjUf_QsdNYB5').child(auth.uid).exists()"
+    },
+    "products": {
+      ".read": "true",
+      ".write": "root.child('userGroups').child('-LknsI_7mjUf_QsdNYB5').child(auth.uid).exists()",
+      ".indexOn": ["name", "status"]
+    },
+    "productCategories": {
+      ".read": "true",
+      ".write": "root.child('userGroups').child('-LknsI_7mjUf_QsdNYB5').child(auth.uid).exists()",
+      "$uid": {
+        ".indexOn": ["name"]
+      }
+    },
+    "orders": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$orderKey": {
+        "$uid": {
+          ".write": "$uid === auth.uid",
+          ".read": "root.child('userGroups').child('-LknsI_7mjUf_QsdNYB5').child(auth.uid).exists()"
+        }
+      }
+    },
+  }
+}

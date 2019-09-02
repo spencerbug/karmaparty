@@ -8,8 +8,10 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "yarn lint",
     "dev": "cross-env HOST=localhost PORT=3040 nuxt",
-    "build": "nuxt build",
+    "build": "nuxt build && yarn copy",
+    "copy": "cp -R functions/.nuxt/dist/ public/assets",
     "start": "cross-env HOST=localhost PORT=3030 NODE_ENV=development node server/server.js",
+    "serve": "firebase serve",
     "generate": "nuxt generate"
   },
   "dependencies": {

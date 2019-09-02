@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /groups/{groupId} {
+    	allow read: if isAuthenticated();
+      allow write: if isAuthenticated();
+      // allow write: if resource.data.name == "Administrator" && checkUserGroup(groupId)
+    }
+    
+    match /userGroups/{userGroupsId}{
+    	allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && isOwner();
+    }
+    
+    match /users/{userId}{
+    	allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && checkUser(userId);
+    }
+    
+  }
+  
+  // Functions //
+  function isAuthenticated(){
+  	return request.auth != null
+  }
+  function isOwner(){
+  	return request.auth.uid != null
+  }
+  function checkUser(id){
+  	return exists(/databases/$(database)/documents/users/$(id))
+  }
+  function checkUserGroup(id){
+  	return exists(/databases/$(database)/documents/userGroups/$(id))
+  }
+}
