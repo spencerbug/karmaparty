@@ -15,6 +15,9 @@
       <div class="hero-foot">
         <nav class="tabs is-boxed is-fullwidth is-fixed-bottom">
           <ul>
+            <li class>
+              <a href="/about#values">Our Values</a>
+            </li>
             <li>
               <a href="/about#howitworks">How It Works</a>
             </li>
@@ -22,13 +25,22 @@
               <a href="/about#mission">Our Mission</a>
             </li>
             <li class>
-              <a href="/about#values">Our Values</a>
-            </li>
-            <li class>
               <a href="/about#team">Our Team</a>
             </li>
           </ul>
         </nav>
+      </div>
+    </section>
+    <!-- Values -->
+    <section class="section" id="values">
+      <div class="box is-primary is-size-5">
+        <h1 class="title has-text-centered">Our Values</h1>
+        <p>
+          We want to be a company of trust. We trust the customers, we trust the companies
+          We all need a part to play to be masters of our own destiny, to make this society better.
+          There’s two ways you have power as a citizen, through your dollar and through your vote.
+          Transparency, honesty, connection
+        </p>
       </div>
     </section>
     <!-- How it works -->
@@ -56,18 +68,6 @@
         <p>For the brands, we want to promote new companies that make cool products that are sustainable, ethical and impactful. An example is a candle company that benefits soup kitchens, or a chocolate company that employs ex-convicts and donates part of the money to womens health.</p>
         <br />
         <p>For causes, we want to find the most effective and impactful nonprofits, and benefit those with part of margins. You can learn about these organizations here.</p>
-      </div>
-    </section>
-    <!-- Values -->
-    <section class="section" id="values">
-      <div class="box is-primary is-size-5">
-        <h1 class="title has-text-centered">Our Values</h1>
-        <p>
-          We want to be a company of trust. We trust the customers, we trust the companies
-          We all need a part to play to be masters of our own destiny, to make this society better.
-          There’s two ways you have power as a citizen, through your dollar and through your vote.
-          Transparency, honesty, connection
-        </p>
       </div>
     </section>
     <!-- Our team -->

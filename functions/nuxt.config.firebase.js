@@ -23,47 +23,47 @@ module.exports = {
             href: '/favicon.ico'
         }]
     },
-    plugins: [
-        '@/plugins/vee-validate',
-        '@/plugins/vue-swal',
-        '@/plugins/vue-croppa',
-        '@/plugins/filters',
-    ],
+    // plugins: [
+    //     '@/plugins/vee-validate',
+    //     '@/plugins/vue-swal',
+    //     '@/plugins/vue-croppa',
+    //     '@/plugins/filters',
+    // ],
     /*
      ** Nuxt.js modules
      */
-    modules: [
-        '@nuxtjs/eslint-module',
-        '@nuxtjs/style-resources',
-        '@nuxtjs/toast',
-        ['vue-warehouse/nuxt',
-            {
-                vuex: true,
-                plugins: [
-                    'store/plugins/expire',
-                    'store/plugins/defaults'
-                ],
-                storages: [
-                    'store/storages/localStorage',
-                    'store/storages/cookieStorage'
-                ]
-            }
-        ],
-    ],
-    build: {
-        extend(config, {
-            isDev,
-            isClient,
-            isServer
-        }) {
-            if (isServer) {
-                config.externals = {
-                    '@firebase/app': 'commonjs @firebase/app',
-                    '@firebase/firestore': 'commonjs @firebase/firestore',
-                    '@firebase/database': 'commonjs @firebase/database',
-                    '@firebase/storage': 'commonjs @firebase/storage',
-                }
-            }
-        }
-    }
+    // modules: [
+    //     '@nuxtjs/eslint-module',
+    //     '@nuxtjs/style-resources',
+    //     '@nuxtjs/toast',
+    //     ['vue-warehouse/nuxt',
+    //         {
+    //             vuex: true,
+    //             plugins: [
+    //                 'store/plugins/expire',
+    //                 'store/plugins/defaults'
+    //             ],
+    //             storages: [
+    //                 'store/storages/localStorage',
+    //                 'store/storages/cookieStorage'
+    //             ]
+    //         }
+    //     ],
+    // ],
+    // build: {
+    //     extend(config, {
+    //         isDev,
+    //         isClient,
+    //         isServer
+    //     }) {
+    //         if (isServer) {
+    //             config.externals = {
+    //                 '@firebase/app': 'commonjs @firebase/app',
+    //                 '@firebase/firestore': 'commonjs @firebase/firestore',
+    //                 '@firebase/database': 'commonjs @firebase/database',
+    //                 '@firebase/storage': 'commonjs @firebase/storage',
+    //             }
+    //         }
+    //     }
+    // }
 }

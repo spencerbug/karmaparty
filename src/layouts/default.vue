@@ -92,8 +92,8 @@
           </div>
         </div>
       </nav>
-      <nuxt />
       <!-- This is where the pages are presented -->
+      <nuxt />
     </div>
 
     <footer class="footer">
