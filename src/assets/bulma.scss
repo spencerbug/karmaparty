@@ -1,11 +1,25 @@
 @charset "utf-8";
 
-$turquoise-transparent: rgba(64, 224, 208, 0.5);
+$dark-transparent: rgba(38, 49, 48, 0.349);
+$dark-med-transparent: rgba(55, 68, 66, 0.938);
+$dark-dark-transparent: rgba(29, 36, 35, 0.644);
 
-$primary: $turquoise-transparent;
+$primary: $dark-transparent;
 $title-color: whitesmoke;
+$subtitle-color: whitesmoke;
 $label-color: whitesmoke;
 $content-color: whitesmoke;
 $text: whitesmoke;
+$navbar-background-color: $dark-transparent;
+$navbar-item-hover-background-color:$dark-dark-transparent;
+$navbar-item-hover-background-color:$dark-med-transparent;
+$navbar-item-color: whitesmoke;
+$navbar-item-active-color: whitesmoke;
+$navbar-item-hover-color: rgb(167, 158, 158);
+$navbar-dropdown-arrow: black;
+$navbar-dropdown-background-color: $dark-dark-transparent;
+$box-background-color: $dark-transparent;
+
+$card-background-color: $dark-transparent;
 
 @import "../../node_modules/bulma/bulma.sass";

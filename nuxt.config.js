@@ -1,9 +1,23 @@
-const env = require("dotenv").config();
+var fs = require("fs");
+// Porting envs from firebase config file
+const envfile = process.env["ENV_FILE"]
+let contents
+if (envfile) {
+  contents = fs.readFileSync(envfile, 'utf8')
+}
 
+if (contents) {
+  let obj = JSON.parse(contents)
+  Object.entries(obj).forEach(([key, value]) => {
+    //use NUXT_ENV_ prefix so it automatically injects variables https://nuxtjs.org/api/configuration-env/
+    process.env["NUXT_ENV_" + key.toUpperCase()] = value;
+  })
+}
+
+// eslint-disable-next-line nuxt/no-cjs-in-config
 module.exports = {
   // mode: 'spa',
   mode: 'universal',
-  env: env.parsed,
 
   srcDir: "src",
   /*
@@ -42,7 +56,7 @@ module.exports = {
     script: [{
       src: '/util.js',
       type: 'text/javascript'
-    }]
+    }, ]
   },
 
   // sass style resouces
@@ -97,14 +111,7 @@ module.exports = {
   /*
    ** Build configuration
    */
-  buildDir: 'functions/.nuxt',
   build: {
-    publicPath: '/public/',
-    babel: {
-      babelrc: false,
-      cacheDirectory: undefined,
-      presets: ["@babel/preset-env"]
-    },
     /*
      ** You can extend webpack config here
      */

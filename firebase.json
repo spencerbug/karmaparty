@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "functions": {
+      "source": "functions"
+    }
+  },
   "database": {
     "rules": "database.rules.json"
   },
@@ -7,18 +12,16 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "dist",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+    "rewrites": [{
+      "source": "**",
+      "function": "ssr"
+    }]
   },
   "storage": {
     "rules": "storage.rules"

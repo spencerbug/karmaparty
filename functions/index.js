@@ -1,38 +1,19 @@
 const functions = require('firebase-functions');
 const {
     Nuxt
-} = require('nuxt')
-const express = require('express')
+} = require('nuxt');
 
-const app = express()
-
-const config = {
-    dev: false,
-    buildDir: '.nuxt',
-    build: {
-        publicPath: 'public',
-    }
+//load env variables to firebase
+const config = functions.config();
+for (const key in config.envs) {
+    process.env["NODE_ENV_" + key.toUpperCase()] = config.envs[key];
 }
 
-const nuxt = new Nuxt(config);
+const nuxtConfig = require('./nuxt.config.firebase.js')
 
-app.use(nuxt.render);
+const nuxt = new Nuxt(nuxtConfig);
 
-function handleRequest(req, res) {
-    res.set('Cache-Control', 'public, max-age=600, s-maxage=1200')
-    nuxt.renderRoute('/').then(result => {
-        res.send(result.html)
-    }).catch(e => {
-        res.send(e)
-    })
-}
-app.get('*', handleRequest)
-
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-
-exports.ssr = functions.https.onRequest(app);
+exports.ssr = functions.https.onRequest(nuxt.render);
 
 exports.helloWorld = functions.https.onRequest((request, response) => {
     response.send("Hello from Firebase!");
